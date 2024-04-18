@@ -23,9 +23,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, '/public'))); 
 app.use(cors(corsOptions)); 
 
-app.get('/', (req, res) => {
-    res.send("Backend is running 123...")
-})
+// Routes
+app.use('/api', require('./routes/api')); 
 
 const port = process.env.PORT || 3000; 
 app.listen(port, () => console.log(`Server is listening at ${port}`)); 
