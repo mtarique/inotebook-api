@@ -10,7 +10,7 @@ require('dotenv').config();
 // mongoose.set('strictQuery', true); 
 // mongoose.connect(process.env.MONGODB_CONNECTION_STRING); 
 // mongoose.connection.on("error", error => console.error("MongoDB could not establish a connection: ", error)); 
-const connectToMongo = require('./database'); 
+const connectToMongo = require('./config/database'); 
 connectToMongo(); 
 
 var corsOptions = {
