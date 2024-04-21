@@ -14,5 +14,6 @@ router.post('/login', validation.authValidationRule, validation.validate, userCo
 router.get('/get-user', authMiddle.authenticate, userController.getUser); 
 
 router.post('/add-note', validation.noteValidationRule, validation.validate, authMiddle.authenticate, noteController.addNotes);
+router.get('/get-notes', authMiddle.authenticate, noteController.getNotes); 
 
 module.exports = router; 
