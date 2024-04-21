@@ -11,6 +11,10 @@ const authValidationRule = [
     body('password', "Please enter your password").exists()
 ]; 
 
+const noteValidationRule = [
+    body('title', "Notes title is required").exists()
+]; 
+
 const validate = (req, res, next) => {
     const errors = validationResult(req); 
 
@@ -21,4 +25,4 @@ const validate = (req, res, next) => {
     next();
 }
 
-module.exports = {userValidationRule, authValidationRule, validate}; 
+module.exports = {userValidationRule, authValidationRule, noteValidationRule, validate}; 
