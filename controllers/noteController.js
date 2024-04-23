@@ -81,3 +81,34 @@ exports.updateNotes = async (req, res) => {
         }); 
     }
 }
+
+exports.deleteNotes = async (req, res) => {
+    try {
+        const result = await Note.deleteOne({"_id": req.params.id, "userId": req.user._id}); 
+
+        if(result.deletedCount === 0) {
+            return res.status(404).json({
+                status: false, 
+                code: 404, 
+                message: "Note not found or you're not authorized to delete it.", 
+                data: result
+            }); 
+        }
+
+        // Note deleted
+        res.status(200).json({
+            status: false, 
+            code: 200, 
+            message: "Note deleted successfully.", 
+            data: result
+        }); 
+        
+    } catch (error) {
+        return res.status(500).json({
+            status: false, 
+            code: 500, 
+            message: "Server error!", 
+            data: {}
+        }); 
+    }
+}
