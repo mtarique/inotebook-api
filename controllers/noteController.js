@@ -44,3 +44,40 @@ exports.getNotes = async (req, res) => {
         }); 
     }
 }
+
+exports.updateNotes = async (req, res) => {
+    try {
+        const { title, content, tag } = req.body; 
+
+        // Create a new note object to be updated
+        const newNote = {};
+        if(title) { newNote.title = title }; 
+        if(content) { newNote.content = content }; 
+        if(tag) { newNote.tag = tag }; 
+
+        const updateNote = await Note.updateOne({"_id": req.params.id, "userId": req.user._id}, { $set: newNote }, {new: true}); 
+
+        if(updateNote.modifiedCount === 1 ) {
+            res.status(200).json({
+                status: false, 
+                code: 200, 
+                message: "Updated", 
+                data: updateNote
+            }); 
+        } else {
+            res.status(404).json({
+                status: false, 
+                code: 404, 
+                message: "Not found", 
+                data: updateNote
+            }); 
+        }
+    } catch (error) {
+        return res.status(500).json({
+            status: false, 
+            code: 500, 
+            message: "Server error!", 
+            data: {}
+        }); 
+    }
+}
