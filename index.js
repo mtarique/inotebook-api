@@ -14,9 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Define a basic GET route
-app.get('/api/status', (req, res) => {
-    res.json({status: true, message: "API is running..."})
-})
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/notes', require('./routes/notes'));  
 
 app.listen(process.env.PORT || 3000, () => console.log(`Server is listening at port ${process.env.PORT || 3000}`));
 

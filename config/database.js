@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const mongoURI = "mongodb://127.0.0.1:27017/inotebook_db"; 
 
 const connectToMongo = () => {
-    mongoose.connect(mongoURI)
+    mongoose.connect(process.env.DB_HOST)
         .then(() => console.log("Successfully connected to database"))
         .catch((error) => console.log("Oops! database connection error: ", error));
 }
